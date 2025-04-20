@@ -84,7 +84,7 @@ function Application() {
             placeholder="Enter name"
             {...register("fatherName", { required: true })}
             name="fatherName"
-            type="text"
+            type="text"  
           />
           {/* Error Messages */}
           {errors.fatherName && (
