@@ -5,7 +5,7 @@ function Navbar() {
   const navLinks = [
     <NavLink
       to={"/"}
-      className={({ isActive }) => (isActive ? "text-red-600" : "")}
+      className={({ isActive }) => (isActive ? "text-red-600 font-semibold" : "font-semibold")}
     >
       {" "}
       <li>
@@ -14,7 +14,7 @@ function Navbar() {
     </NavLink>,
     <NavLink
       to={"/blog"}
-      className={({ isActive }) => (isActive ? "text-red-600" : "")}
+      className={({ isActive }) => (isActive ? "text-red-600 font-semibold" : " font-semibold")}
     >
       {" "}
       <li>
@@ -23,7 +23,7 @@ function Navbar() {
     </NavLink>,
     <NavLink
       to={"/application"}
-      className={({ isActive }) => (isActive ? "text-red-600" : "")}
+      className={({ isActive }) => (isActive ? "text-red-600 font-semibold" : "font-semibold")}
     >
       {" "}
       <li>
@@ -54,7 +54,7 @@ function Navbar() {
           </div>
           <ul
             tabIndex={0}
-            className="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow"
+            className="menu menu-sm dropdown-content  z-1 mt-3 w-52 p-2 shadow"
           >
             {navLinks}
           </ul>
