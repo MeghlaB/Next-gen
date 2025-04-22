@@ -23,7 +23,7 @@ const ManageBlogs = () => {
         </label>
       </div>
 
-      {/* 🔽 Render Add Blog Modal Here */}
+   
       <AddBlogModal blogs={blogs} setBlogs={setBlogs} />
 
       <BlogTable blogs={blogs} setBlogs={setBlogs} />

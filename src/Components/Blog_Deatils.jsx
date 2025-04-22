@@ -19,7 +19,8 @@ const Blog_Deatils = () => {
   }
 
   return (
-    <div className="">
+    <div>
+      {/* Background Image with Blur */}
       <div className="relative flex flex-col items-center pt-16 px-4">
         <div
           className="absolute inset-0 h-[600px] object-cover"
@@ -27,40 +28,44 @@ const Blog_Deatils = () => {
             backgroundImage: `url(${blog.thumbnail})`,
             filter: "blur(100px)",
             zIndex: -1,
-
             backgroundSize: "cover",
             backgroundPosition: "center",
           }}
         ></div>
 
-   
         <img
           src={blog.thumbnail}
-          alt={''}
+          alt={""}
           className="w-full max-w-3xl h-[550px] object-cover"
         />
       </div>
 
-   <div className="w-full mx-auto mt-4 bg-white">
-   <h1 className="text-4xl font-bold text-white text-center">
-        {blog.title}
-      </h1>
-      <p className="text-sm text-gray-200 mt-2">
-        Published on: <span className="font-medium">{blog.publishedDate}</span>
-      </p>
+      {/* Blog Content */}
+      <div className="w-full mx-auto mt-4 bg-white p-6 rounded-lg shadow-lg">
+        <div className="grid grid-cols-12 gap-6">
+          {/* Left column (for blog content or sidebar) */}
+          <div className="col-span-3  p-4 rounded-lg shadow-md text-center ">
+            <h3 > 
+               Words : <span className=" ">{blog.words}</span> 
+               
+            </h3>
+            <h3 > 
+               Category : <span className=" ">{blog.category}</span> 
+            </h3>
+            <h3 > 
+               PublishedDate : <span className="">{new Date().toLocaleDateString()}</span> 
+            </h3>
 
-      {/* Content section */}
-      <div className=" p-6 mt-10 rounded-xl shadow-lg max-w-4xl w-full">
-        <p className="text-lg font-medium text-gray-700 mb-3">
-          Category: <span className="text-blue-500">{blog.category}</span>
-        </p>
-        <p className="text-gray-800 mb-4 italic">{blog.description}</p>
-        <hr className="my-4" />
-        <div className="text-gray-900 leading-relaxed whitespace-pre-line">
-          {blog.content}
+            
+          </div>
+
+       
+          <div className="col-span-9 ">
+            <h2 className="text-3xl font-semibold mb-4 text-gray-300">{blog.title}</h2>
+            <p className=" ">{blog.content}</p>
+          </div>
         </div>
       </div>
-   </div>
     </div>
   );
 };
