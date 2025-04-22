@@ -1,424 +1,172 @@
-import React from "react";
-import { useForm } from "react-hook-form";
-import Swal from "sweetalert2";
-import { motion } from 'framer-motion';
-function Application() {
+import React, { useState } from 'react';
+import { useForm } from 'react-hook-form';
+
+export default function ApplicationFormModal() {
+  const [isOpen, setIsOpen] = useState(false);
   const {
     register,
     handleSubmit,
-    reset,
     formState: { errors },
   } = useForm();
 
   const onSubmit = (data) => {
     console.log(data);
-    reset();
-    Swal.fire({
-      title: "Drag me!",
-      icon: "success",
-      draggable: true,
-    });
+    alert('Form Submitted!');
+    setIsOpen(false);
   };
 
   return (
-  <div className="max-w-5xl mx-auto ">
-      <div className="  p-6 bg-white rounded-xl shadow mt-9 border-t-8 border-t-amber-900 border-b-8 border-b-amber-900 mb-6 pb-5 ">
-      <motion.h2
-      className="text-2xl font-semibold mb-4 text-center pb-6"
-      initial={{ opacity: 0, y: -50 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.7, ease: "easeOut" }}
-    >
-      Application Form
-    </motion.h2>
-      <form
-        onSubmit={handleSubmit(onSubmit)}
-        className="grid grid-cols-2  gap-3 "
+    <>
+      {/* Open Modal Button */}
+      <button
+        onClick={() => setIsOpen(true)}
+        className="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700"
       >
-        {/* Name* */}
-        <div className="space-y-2 text-sm text-zinc-800 ">
-          <label htmlFor="username_2" className="block font-medium">
-            Name*
-          </label>
-          <input
-            className="flex h-10 w-full rounded-md border px-3 py-2 text-sm focus:ring-1 focus-visible:outline-none dark:border-zinc-700"
-            id="username_2"
-            placeholder="Enter name"
-            {...register("name", { required: true })}
-            name="name"
-            type="text"
-          />
-          {/* Error Messages */}
-          {errors.name && (
-            <span className="text-red-600 text-[14px]">Name is required</span>
-          )}
-        </div>
-        {/* DateOF Birth* */}
-        <div className="space-y-2 text-sm text-zinc-800">
-          <label htmlFor="date" className="block font-medium">
-            Date Of Birth*
-          </label>
-          <input
-            id="date"
-            placeholder="Enter your date of birth"
-            {...register("date", { required: true })}
-            name="date"
-            type="date"
-            className="flex h-10 w-full appearance-none rounded-md border px-3 py-2 pr-10 text-sm focus:ring-1 focus-visible:outline-none dark:border-zinc-700"
-          />
-          {/* Error Messages */}
-          {errors.date && (
-            <span className="text-red-600 text-[14px]">
-              Date of Birth is required
-            </span>
-          )}
-        </div>
-        {/*Father's Name* */}
-        <div className="space-y-2 text-sm text-zinc-800 ">
-          <label htmlFor="username_2" className="block font-medium">
-            Father's Name*
-          </label>
-          <input
-            className="flex h-10 w-full rounded-md border px-3 py-2 text-sm focus:ring-1 focus-visible:outline-none dark:border-zinc-700"
-            id="username_2"
-            placeholder="Enter name"
-            {...register("fatherName", { required: true })}
-            name="fatherName"
-            type="text"  
-          />
-          {/* Error Messages */}
-          {errors.fatherName && (
-            <span className="text-red-600 text-[14px]">
-              Father's Name is required
-            </span>
-          )}
-        </div>
-        {/*Mother's Name* */}
-        <div className="space-y-2 text-sm text-zinc-800 ">
-          <label htmlFor="username_2" className="block font-medium">
-            Mother's Name*
-          </label>
-          <input
-            className="flex h-10 w-full rounded-md border px-3 py-2 text-sm focus:ring-1 focus-visible:outline-none dark:border-zinc-700"
-            id="username_2"
-            placeholder="Enter name"
-            {...register("motherName", { required: true })}
-            name="motherName"
-            type="text"
-          />
-          {/* Error Messages */}
-          {errors.mothereName && (
-            <span className="text-red-600 text-[14px]">
-              Mother's Name is required
-            </span>
-          )}
-        </div>
+        Open Application Form
+      </button>
 
-        {/*Place of birth* */}
-        <div className="space-y-2 text-sm text-zinc-800 ">
-          <label htmlFor="username_2" className="block font-medium">
-            Place of Birth*
-          </label>
-          <input
-            className="flex h-10 w-full rounded-md border px-3 py-2 text-sm focus:ring-1 focus-visible:outline-none dark:border-zinc-700"
-            id="username_2"
-            placeholder="palce of birth"
-            {...register("placeofbirth", { required: true })}
-            name="placeofbirth"
-            type="text"
-          />
-          {/* Error Messages */}
-          {errors.placeofbirth && (
-            <span className="text-red-600 text-[14px]">
-              Place of Birth is required
-            </span>
-          )}
-        </div>
+      {/* Modal Overlay */}
+      {isOpen && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center">
+          <div className="bg-white w-full max-w-4xl rounded-lg shadow-lg p-6 relative overflow-y-auto max-h-[90vh]">
+            {/* Close Button */}
+            <button
+              className="absolute top-3 right-3 text-xl font-bold text-gray-500 hover:text-red-500"
+              onClick={() => setIsOpen(false)}
+            >
+              &times;
+            </button>
 
-        {/* Gender selection */}
-        <div className="space-y-2 text-sm text-zinc-800">
-          <label htmlFor="gender" className="block font-medium">
-            Gender Selection*
-          </label>
-          <select
-            id="gender"
-            {...register("gender", { required: true })}
-            className="w-full h-10 rounded-md border px-3 py-2 text-sm focus:ring-1 focus-visible:outline-none dark:border-zinc-700"
-          >
-            <option value="">Select gender</option>
-            <option value="female">Female</option>
-            <option value="male">Male</option>
-            <option value="other">Other</option>
-          </select>
+            <h2 className="text-2xl font-bold text-center mb-6">Application Form</h2>
 
-          {/* Error Messages */}
-          {errors.gender && (
-            <span className="text-red-600 text-[14px]">Gender is required</span>
-          )}
-        </div>
-        {/* Nationality* */}
-        <div className="space-y-2 text-sm text-zinc-800 ">
-          <label htmlFor="username_2" className="block font-medium">
-            Nationality*
-          </label>
-          <input
-            className="flex h-10 w-full rounded-md border px-3 py-2 text-sm focus:ring-1 focus-visible:outline-none dark:border-zinc-700"
-            id="username_2"
-            placeholder="nationality"
-            {...register("nationality", { required: true })}
-            name="nationality"
-            type="text"
-          />
-          {/* Error Messages */}
-          {errors.nationality && (
-            <span className="text-red-600 text-[14px]">
-              Nationality is required
-            </span>
-          )}
-        </div>
-        {/*  NIRC/Birth/Passport number * */}
-        <div className="space-y-2 text-sm text-zinc-800 ">
-          <label htmlFor="username_2" className="block font-medium">
-            NIRC/Birth/Passport number*
-          </label>
-          <input
-            className="flex h-10 w-full rounded-md border px-3 py-2 text-sm focus:ring-1 focus-visible:outline-none dark:border-zinc-700"
-            id="username_2"
-            placeholder="nirc/birth/passport number"
-            {...register("nbpNumber", { required: true })}
-            name="nbpNumber"
-            type="text"
-          />
-          {/* Error Messages */}
-          {errors.nbpNumber && (
-            <span className="text-red-600 text-[14px]">
-              {" "}
-              NIRC/Birth/Passport number is required
-            </span>
-          )}
-        </div>
-        {/* Religion* */}
-        <div className="space-y-2 text-sm text-zinc-800 ">
-          <label htmlFor="username_2" className="block font-medium">
-            Religion*
-          </label>
-          <input
-            className="flex h-10 w-full rounded-md border px-3 py-2 text-sm focus:ring-1 focus-visible:outline-none dark:border-zinc-700"
-            id="username_2"
-            placeholder="Enter religion"
-            {...register("religion", { required: true })}
-            name="religion"
-            type="text"
-          />
-          {/* Error Messages */}
-          {errors.religion && (
-            <span className="text-red-600 text-[14px]">
-              Religion is required
-            </span>
-          )}
-        </div>
-        {/* Marital Status */}
-        <div className="space-y-2 text-sm text-zinc-800">
-          <label htmlFor="gender" className="block font-medium">
-            Marital Status*
-          </label>
-          <select
-            id="marital"
-            {...register("marital", { required: true })}
-            className="w-full h-10 rounded-md border px-3 py-2 text-sm focus:ring-1 focus-visible:outline-none dark:border-zinc-700"
-          >
-            <option value="">Select Marital</option>
-            <option value="single">Single</option>
-            <option value="Married">Married</option>
-            <option value="other">Other</option>
-          </select>
+            <form onSubmit={handleSubmit(onSubmit)} className="grid grid-cols-2 gap-4">
+              {/* Row 1 */}
+              <div>
+                <label>Name*</label>
+                <input {...register('name', { required: true })} className="w-full p-2 border rounded" />
+                {errors.name && <p className="text-red-600 text-sm">Name is required</p>}
+              </div>
+              <div>
+                <label>Date of Birth*</label>
+                <input type="date" {...register('dob', { required: true })} className="w-full p-2 border rounded" />
+                {errors.dob && <p className="text-red-600 text-sm">Date of Birth is required</p>}
+              </div>
 
-          {/* Error Messages */}
-          {errors.marital && (
-            <span className="text-red-600 text-[14px]">
-              Marital Status is required
-            </span>
-          )}
-        </div>
+              {/* Row 2 */}
+              <div>
+                <label>Father’s Name*</label>
+                <input {...register('fatherName', { required: true })} className="w-full p-2 border rounded" />
+                {errors.fatherName && <p className="text-red-600 text-sm">Father’s Name is required</p>}
+              </div>
+              <div>
+                <label>Mother’s Name*</label>
+                <input {...register('motherName', { required: true })} className="w-full p-2 border rounded" />
+                {errors.motherName && <p className="text-red-600 text-sm">Mother’s Name is required</p>}
+              </div>
 
-        {/* Current Profession* */}
-        <div className="space-y-2 text-sm text-zinc-800 ">
-          <label htmlFor="username_2" className="block font-medium">
-            Current Profession*
-          </label>
-          <input
-            className="flex h-10 w-full rounded-md border px-3 py-2 text-sm focus:ring-1 focus-visible:outline-none dark:border-zinc-700"
-            id="username_2"
-            placeholder="Enter current profession"
-            {...register("current", { required: true })}
-            name="current"
-            type="text"
-          />
-          {/* Error Messages */}
-          {errors.current && (
-            <span className="text-red-600 text-[14px]">
-              Current Profession is required
-            </span>
-          )}
-        </div>
-        {/* Contact Number* */}
-        <div className="space-y-2 text-sm text-zinc-800 ">
-          <label htmlFor="username_2" className="block font-medium">
-            Contact Number*
-          </label>
-          <input
-            className="flex h-10 w-full rounded-md border px-3 py-2 text-sm focus:ring-1 focus-visible:outline-none dark:border-zinc-700"
-            id="username_2"
-            placeholder="Enter contact number"
-            {...register("contact", { required: true })}
-            name="contact"
-            type="number"
-          />
-          {/* Error Messages */}
-          {errors.contact && (
-            <span className="text-red-600 text-[14px]">
-              Contact Number is required
-            </span>
-          )}
-        </div>
+              {/* Row 3 */}
+              <div>
+                <label>Nationality*</label>
+                <input {...register('nationality', { required: true })} className="w-full p-2 border rounded" />
+                {errors.nationality && <p className="text-red-600 text-sm">Nationality is required</p>}
+              </div>
+              <div>
+                <label>Gender*</label>
+                <select {...register('gender', { required: true })} className="w-full p-2 border rounded">
+                  <option value="">Select</option>
+                  <option value="Male">Male</option>
+                  <option value="Female">Female</option>
+                </select>
+                {errors.gender && <p className="text-red-600 text-sm">Gender is required</p>}
+              </div>
 
-        {/* Email* */}
-        <div className="space-y-2 text-sm text-zinc-800 ">
-          <label htmlFor="username_2" className="block font-medium">
-            Email*
-          </label>
-          <input
-            className="flex h-10 w-full rounded-md border px-3 py-2 text-sm focus:ring-1 focus-visible:outline-none dark:border-zinc-700"
-            id="username_2"
-            placeholder="Enter email"
-            {...register("email", { required: true })}
-            name="email"
-            type="email"
-          />
-          {/* Error Messages */}
-          {errors.email && (
-            <span className="text-red-600 text-[14px]">Email is required</span>
-          )}
-        </div>
+              {/* Row 4 */}
+              <div>
+                <label>NID/Birth/Passport No.*</label>
+                <input {...register('idNumber', { required: true })} className="w-full p-2 border rounded" />
+                {errors.idNumber && <p className="text-red-600 text-sm">NID/Birth/Passport number is required</p>}
+              </div>
+              <div>
+                <label>Marital Status*</label>
+                <select {...register('maritalStatus', { required: true })} className="w-full p-2 border rounded">
+                  <option value="">Select</option>
+                  <option value="Single">Single</option>
+                  <option value="Married">Married</option>
+                </select>
+                {errors.maritalStatus && <p className="text-red-600 text-sm">Marital Status is required</p>}
+              </div>
 
-        {/* Malling Address* */}
-        <div className="space-y-2 text-sm text-zinc-800 ">
-          <label htmlFor="username_2" className="block font-medium">
-            Mailing Address*
-          </label>
-          <input
-            className="flex h-10 w-full rounded-md border px-3 py-2 text-sm focus:ring-1 focus-visible:outline-none dark:border-zinc-700"
-            id="username_2"
-            placeholder="Enter Mailling address"
-            {...register("mailling", { required: true })}
-            name="mailling"
-            type="text"
-          />
-          {/* Error Messages */}
-          {errors.mailling && (
-            <span className="text-red-600 text-[14px]">
-              Malling Address is required
-            </span>
-          )}
-        </div>
-        {/* Parmanent Address* */}
-        <div className="space-y-2 text-sm text-zinc-800 ">
-          <label htmlFor="username_2" className="block font-medium">
-            Parmanent Address*
-          </label>
-          <input
-            className="flex h-10 w-full rounded-md border px-3 py-2 text-sm focus:ring-1 focus-visible:outline-none dark:border-zinc-700"
-            id="username_2"
-            placeholder="Enter Parmanent address"
-            {...register("parmanent", { required: true })}
-            name="parmanent"
-            type="text"
-          />
-          {/* Error Messages */}
-          {errors.parmanent && (
-            <span className="text-red-600 text-[14px]">
-              Parmanent Address is required
-            </span>
-          )}
-        </div>
-        {/*photoUrl */}
-        <div className="space-y-2 text-sm text-zinc-800 ">
-          <label htmlFor="username_2" className="block font-medium">
-            Photo*
-          </label>
-          <input
-            className="flex h-10 w-full rounded-md border px-3 py-2 text-sm focus:ring-1 focus-visible:outline-none dark:border-zinc-700"
-            id="username_2"
-            placeholder="Enter Photo-Url"
-            {...register("photo", { required: true })}
-            name="photo"
-            type="url"
-          />
-          {/* Error Messages */}
-          {errors.photo && (
-            <span className="text-red-600 text-[14px]">Photo is required</span>
-          )}
-        </div>
-        {/*NRIC Photo */}
-        <div className="space-y-2 text-sm text-zinc-800 ">
-          <label htmlFor="username_2" className="block font-medium">
-            NRIC Photo*
-          </label>
-          <input
-            className="flex h-10 w-full rounded-md border px-3 py-2 text-sm focus:ring-1 focus-visible:outline-none dark:border-zinc-700"
-            id="username_2"
-            placeholder="Enter NRIC Photo"
-            {...register("nircphoto", { required: true })}
-            name="nircphoto"
-            type="file"
-          />
-          {/* Error Messages */}
-          {errors.nircphoto && (
-            <span className="text-red-600 text-[14px]">
-              NIRC Photo is required
-            </span>
-          )}
-        </div>
+              {/* Row 5 */}
+              <div>
+                <label>Religion*</label>
+                <input {...register('religion', { required: true })} className="w-full p-2 border rounded" />
+                {errors.religion && <p className="text-red-600 text-sm">Religion is required</p>}
+              </div>
+              <div>
+                <label>Profession*</label>
+                <input {...register('profession', { required: true })} className="w-full p-2 border rounded" />
+                {errors.profession && <p className="text-red-600 text-sm">Current Profession is required</p>}
+              </div>
 
-        {/*upload Cv*/}
-        <div className="space-y-2 text-sm text-zinc-800 ">
-          <label htmlFor="username_2" className="block font-medium">
-            Upload CV*
-          </label>
-          <input
-            className="flex h-10 w-full rounded-md border px-3 py-2 text-sm focus:ring-1 focus-visible:outline-none dark:border-zinc-700"
-            id="username_2"
-            placeholder="File chooise"
-            {...register("cv", { required: true })}
-            name="cv"
-            type="file"
-          />
-          {/* Error Messages */}
-          {errors.cv && (
-            <span className="text-red-600 text-[14px]">
-              Upload CV is required
-            </span>
-          )}
-        </div>
+              {/* Row 6 */}
+              <div>
+                <label>Contact Number*</label>
+                <input {...register('mobile', { required: true })} className="w-full p-2 border rounded" />
+                {errors.mobile && <p className="text-red-600 text-sm">Contact Number is required</p>}
+              </div>
+              <div>
+                <label>Email*</label>
+                <input type="email" {...register('email', { required: true })} className="w-full p-2 border rounded" />
+                {errors.email && <p className="text-red-600 text-sm">Email is required</p>}
+              </div>
 
-        
-<div className="col-span-2">
-  <motion.button
-    type="submit"
-    className="bg-red-600 hover:bg-red-900 text-white px-6 py-2 rounded mt-4"
-    initial={{ opacity: 0, y: -50 }}    
-    animate={{ opacity: 1, y: 0 }}     
-    transition={{ duration: 0.6, ease: "easeOut", delay: 0.3 }} 
-    whileHover={{ scale: 1.05 }}       
-    whileTap={{ scale: 0.95 }}       
-  >
-    Submit
-  </motion.button>
-</div>
-      </form>
-    </div>
-  </div>
+              {/* Row 7 */}
+              <div>
+                <label>Mailing Address*</label>
+                <input {...register('mailingAddress', { required: true })} className="w-full p-2 border rounded" />
+                {errors.mailingAddress && <p className="text-red-600 text-sm">Mailing Address is required</p>}
+              </div>
+              <div>
+                <label>Permanent Address*</label>
+                <input {...register('permanentAddress', { required: true })} className="w-full p-2 border rounded" />
+                {errors.permanentAddress && <p className="text-red-600 text-sm">Permanent Address is required</p>}
+              </div>
+
+              {/* Row 8 */}
+              <div>
+                <label>Photo*</label>
+                <input
+                  type="file"
+                  accept="image/*"
+                  {...register('photo', { required: true })}
+                  className="w-full p-2 border rounded"
+                />
+                {errors.photo && <p className="text-red-600 text-sm">NRIC Photo is required</p>}
+              </div>
+              <div>
+                <label>Upload CV*</label>
+                <input
+                  type="file"
+                  accept=".pdf"
+                  {...register('cv', { required: true })}
+                  className="w-full p-2 border rounded"
+                />
+                {errors.cv && <p className="text-red-600 text-sm">Upload CV is required</p>}
+              </div>
+
+              {/* Submit Button */}
+              <div className="col-span-2 mt-4">
+                <button
+                  type="submit"
+                  className="w-full bg-red-500 text-white py-2 rounded hover:bg-red-600"
+                >
+                  Submit
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      )}
+    </>
   );
 }
-
-export default Application;
