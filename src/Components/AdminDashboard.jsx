@@ -28,7 +28,7 @@ function AdminDashboard() {
         Add-Doctor
       </Link>
       <Link
-        to="/dashboard/user-management?role=admin"
+        to="/dashboard/alluser"
         className="flex items-center gap-3 hover:text-gray-300"
       >
         <User size={20} />

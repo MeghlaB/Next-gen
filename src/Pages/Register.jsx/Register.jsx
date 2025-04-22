@@ -74,6 +74,7 @@ function Register() {
         name:res.user?.displayName,
         photo:res.user?.photoURL
       }
+      console.log(userInfo)
       axiosPublic.post('/users',userInfo)
       .then(res=>{
         if(res.data.insertedId){

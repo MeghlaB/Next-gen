@@ -9,6 +9,7 @@ import Register from "../Pages/Register.jsx/Register";
 import Privetroutes from "./Privetroutes";
 import Dashboard from "../Dashboard/Dashboard";
 import AdminHome from "../Dashboard/Admin/AdminHome";
+import AllUsers from "../Dashboard/Admin/Alluser";
 
 
 const router = createBrowserRouter([
@@ -51,6 +52,10 @@ const router = createBrowserRouter([
         
         element:<AdminHome/>
       },
+      {
+        path:'/alluser',
+        element:<AllUsers/>
+      }
      
     ]
   }
