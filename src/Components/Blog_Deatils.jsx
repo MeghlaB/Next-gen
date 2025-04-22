@@ -19,7 +19,7 @@ const Blog_Deatils = () => {
   }
 
   return (
-    <div className="relative min-h-screen">
+    <div className="">
       <div className="relative flex flex-col items-center pt-16 px-4">
         <div
           className="absolute inset-0 h-[600px] object-cover"
@@ -36,13 +36,13 @@ const Blog_Deatils = () => {
    
         <img
           src={blog.thumbnail}
-          alt={blog.title}
+          alt={''}
           className="w-full max-w-3xl h-[550px] object-cover"
         />
       </div>
 
-   <div>
-   <h1 className="text-4xl font-bold text-white mt-6 text-center">
+   <div className="w-full mx-auto mt-4 bg-white">
+   <h1 className="text-4xl font-bold text-white text-center">
         {blog.title}
       </h1>
       <p className="text-sm text-gray-200 mt-2">
@@ -50,7 +50,7 @@ const Blog_Deatils = () => {
       </p>
 
       {/* Content section */}
-      <div className="bg-white p-6 mt-10 rounded-xl shadow-lg max-w-4xl w-full">
+      <div className=" p-6 mt-10 rounded-xl shadow-lg max-w-4xl w-full">
         <p className="text-lg font-medium text-gray-700 mb-3">
           Category: <span className="text-blue-500">{blog.category}</span>
         </p>
