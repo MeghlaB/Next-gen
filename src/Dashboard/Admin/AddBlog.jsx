@@ -22,9 +22,8 @@ reset,
       title: data?.title,
       category: data?.category,
       words: data?.words,
-      phone: data?.phone,
       blogContent: data?.blogContent,
-      image: data?.image[0].name,
+      image: data?.image,
     };
     console.log(newBloginfo);
     axiosPublic.post("/add-blog", newBloginfo).then((res) => {
@@ -113,9 +112,9 @@ reset,
           </div> */}
           {/* Profile Image */}
           <div>
-            <label className="block font-semibold mb-1"> Image</label>
+            <label className="block font-semibold mb-1">Image</label>
             <input
-              type="file"
+              type="url"
               {...register("image", { required: "Profile image is required" })}
               className="file-input file-input-bordered w-full"
             />
@@ -127,9 +126,9 @@ reset,
           {/* Blog content */}
           <div className="col-span-2">
             <label className="block font-semibold mb-1">Blog Content</label>
-            <input
+            <textarea
               {...register("blogContent", { required: "Available time is required" })}
-              className="input input-bordered w-full"
+              className="input input-bordered w-full min-h-[120px]"
               placeholder="blog content"
             />
             {errors.blogContent && (
