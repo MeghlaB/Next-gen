@@ -34,6 +34,13 @@ function AdminDashboard() {
         <User2 size={20} />
         All User
       </Link>
+      <Link
+        to="/dashboard/application"
+        className="flex items-center gap-3 hover:text-gray-300"
+      >
+        <User2 size={20} />
+        Application Sheet
+      </Link>
     </nav>
    
   </aside>

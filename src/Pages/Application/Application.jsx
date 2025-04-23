@@ -15,9 +15,6 @@ export default function ApplicationForm() {
 
   const onSubmit = (data) => {
     console.log(data);
-    // try {
-    //   const formData = new FormData();
-  
          const formData ={
           name: data.name,
           dob: data.dob,
@@ -49,29 +46,6 @@ export default function ApplicationForm() {
           });
         }
        })
-  
-    //   if (res.data.insertedId) {
-    //     Swal.fire({
-    //       title: 'Application Submitted!',
-    //       icon: 'success',
-    //       confirmButtonText: 'OK',
-    //     });
-    //     // optionally navigate
-    //     // navigate('/success-page')
-    //   }
-    // } catch (error) {
-    //   console.error(error);
-    //   Swal.fire({
-    //     title: 'Submission Failed!',
-    //     icon: 'error',
-    //     text: 'Please try again later.',
-    //   });
-    // }
-
-
-
-
-
 
     }
 
