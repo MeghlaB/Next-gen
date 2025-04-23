@@ -64,12 +64,9 @@ function AuthProvider({ children }) {
           .then(res =>{
             if(res.data.token){
               setIsLoading(false)
-              localStorage.setItem('access-token',res.data.token)
+              localStorage.setItem('access-token',res.data?.token)
             }
           })
-        
-        
-        
       }
       else{
         // remove token 
@@ -78,12 +75,12 @@ function AuthProvider({ children }) {
 
       }
       console.log("Cureent_User", currentUser);
-      setIsLoading(false);
+      // setIsLoading(false);
     });
     return () => {
       return Unsubscribe();
     };
-  }, []);
+  }, [axiosPublic]);
   const authInfo = {
     user,
     isloading,

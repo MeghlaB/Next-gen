@@ -1,10 +1,10 @@
 import axios from 'axios'
 import React from 'react'
 
-import UseAuth from './UseAuth';
+
 
  const axiosSecure = axios.create({
-    baseURL:'http://localhost:5000'
+    baseURL:'https://next-gen-backend-roan.vercel.app'
 })
 function UseAxiosSecuire() {
     return axiosSecure

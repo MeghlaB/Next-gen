@@ -11,12 +11,12 @@ const AddBlogFrom= () => {
   const {
     register,
     handleSubmit,
-reset,
+
     formState: { errors },
   } = useForm();
 
   const onSubmit = (data) => {
-    console.log("blog Data:", data);
+    // console.log("blog Data:", data);
     
     const newBloginfo = {
       title: data?.title,
@@ -25,10 +25,9 @@ reset,
       blogContent: data?.blogContent,
       image: data?.image,
     };
-    console.log(newBloginfo);
+    // console.log(newBloginfo);
     axiosPublic.post("/add-blog", newBloginfo).then((res) => {
       console.log(res.data);
-      reset()
       if (res.data.insertedId) {
         Swal.fire({
           title: "Blog Added SuccessFully",

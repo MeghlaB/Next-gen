@@ -12,7 +12,7 @@ function Navbar() {
         // Sign-out successful.
       })
       .catch((error) => {
-        console.log(error.message);
+        // console.log(error.message);
         // An error happened.
       });
   };

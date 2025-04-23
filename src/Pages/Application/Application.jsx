@@ -10,7 +10,7 @@ export default function ApplicationFormModal() {
   } = useForm();
 
   const onSubmit = (data) => {
-    console.log(data);
+    // console.log(data);
     alert('Form Submitted!');
     setIsOpen(false);
   };
@@ -18,12 +18,12 @@ export default function ApplicationFormModal() {
   return (
     <>
       {/* Open Modal Button */}
-      <button
+      {/* <button
         onClick={() => setIsOpen(true)}
         className="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700"
       >
         Open Application Form
-      </button>
+      </button> */}
 
       {/* Modal Overlay */}
       {isOpen && (
