@@ -1,33 +1,95 @@
 import React from 'react';
 import { Mail, Phone, MapPin } from 'lucide-react';
 import { useForm } from 'react-hook-form';
+import UseAxiosPublic from '../../Hooks/UseAxiosPublic';
+import Swal from 'sweetalert2';
 
 export default function ApplicationForm() {
+  const axiosPublic = UseAxiosPublic()
   const {
     register,
     handleSubmit,
+    reset,
     formState: { errors },
   } = useForm();
 
   const onSubmit = (data) => {
     console.log(data);
-  };
+    // try {
+    //   const formData = new FormData();
+  
+         const formData ={
+          name: data.name,
+          dob: data.dob,
+          fatherName: data.fatherName,
+          motherName: data.motherName,
+          nationality: data.nationalit,
+          gender: data.gender,
+          idNumber: data.idNumber,
+          maritalStatus: data.maritalStatus,
+          religion: data.religion,
+          profession: data.profession,
+          mobile: data.mobile,
+          email: data.email,
+          mailingAddress: data.mailingAddress,
+          permanentAddress: data.permanentAddress,
+          photo: data.photo[0], 
+          cv: data.cv[0] ,
+         }
+  console.log(formData)
+       axiosPublic.post('/application', formData)
+       .then(res=>{
+        console.log(res.data)
+        reset()
+        if(res.data.insertedId){
+          Swal.fire({
+           title: 'Application Submitted!',
+             icon: 'success',
+            confirmButtonText: 'OK',
+          });
+        }
+       })
+  
+    //   if (res.data.insertedId) {
+    //     Swal.fire({
+    //       title: 'Application Submitted!',
+    //       icon: 'success',
+    //       confirmButtonText: 'OK',
+    //     });
+    //     // optionally navigate
+    //     // navigate('/success-page')
+    //   }
+    // } catch (error) {
+    //   console.error(error);
+    //   Swal.fire({
+    //     title: 'Submission Failed!',
+    //     icon: 'error',
+    //     text: 'Please try again later.',
+    //   });
+    // }
+
+
+
+
+
+
+    }
 
   return (
     <div className="min-h-screen flex flex-col md:flex-row p-10 gap-10 bg-gray-50">
       {/* Left: Contact Info */}
       <div className="md:w-1/2 flex flex-col justify-center gap-6">
-        <h2 className="text-3xl font-bold text-blue-500 mb-4">Get In Touch</h2>
+        <h2 className="text-3xl font-bold text-red-500 mb-4">Get In Touch</h2>
         <div className="flex items-center gap-4">
-          <Phone className="text-blue-600" />
+          <Phone className="text-red-600" />
           <span className="text-lg">+880 1234 567 890</span>
         </div>
         <div className="flex items-center gap-4">
-          <Mail className="text-blue-600" />
+          <Mail className="text-red-600" />
           <span className="text-lg">info@example.com</span>
         </div>
         <div className="flex items-center gap-4">
-          <MapPin className="text-blue-600" />
+          <MapPin className="text-red-600" />
           <span className="text-lg">Dhaka, Bangladesh</span>
         </div>
       </div>

@@ -12,6 +12,7 @@ import AdminHome from "../Dashboard/Admin/AdminHome";
 import AllUsers from "../Dashboard/Admin/Alluser";
 import AddBlogFrom from "../Dashboard/Admin/Addblog";
 import BlogManagement from "../Dashboard/Admin/BlogManagement";
+import ApplicationData from "../Dashboard/Admin/ApplicationData";
 
 
 const router = createBrowserRouter([
@@ -65,6 +66,10 @@ const router = createBrowserRouter([
       {
         path:"blog-management",
         element:<BlogManagement/>
+      },
+      {
+        path:'application',
+        element:<ApplicationData/>
       }
 
      

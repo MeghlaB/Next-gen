@@ -24,6 +24,22 @@ function AdminHome() {
       return res.data;
     },
   });
+
+  const {
+    data: applications = [],
+    
+   
+  } = useQuery({
+    queryKey: ["applications"],
+    queryFn: async () => {
+      const res = await axiosSecure.get("/applications");
+      console.log(res.data)
+      return res.data;
+    },
+  });
+
+
+
   if (isLoading) {
     return <p className="text-center text-gray-500 mt-10">Loading blogs...</p>;
   }
@@ -59,7 +75,9 @@ function AdminHome() {
               <BookImage/>
              
             </div>
-            <div className="text-xl font-bold text-white"> Application</div>
+            <div className="text-xl font-bold text-white"> Application
+            <span className="text-black">({applications.length}) </span>
+            </div>
           </div>
         </div>
         {/* grid-4 */}

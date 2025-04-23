@@ -28,6 +28,7 @@ const AddBlogFrom= () => {
     // console.log(newBloginfo);
     axiosPublic.post("/add-blog", newBloginfo).then((res) => {
       console.log(res.data);
+    
       if (res.data.insertedId) {
         Swal.fire({
           title: "Blog Added SuccessFully",
