@@ -10,6 +10,7 @@ import Privetroutes from "./Privetroutes";
 import Dashboard from "../Dashboard/Dashboard";
 import AdminHome from "../Dashboard/Admin/AdminHome";
 import AllUsers from "../Dashboard/Admin/Alluser";
+import AddBlogFrom from "../Dashboard/Admin/Addblog";
 
 
 const router = createBrowserRouter([
@@ -53,9 +54,14 @@ const router = createBrowserRouter([
         element:<AdminHome/>
       },
       {
-        path:'/alluser',
+        path:'alluser',
         element:<AllUsers/>
+      },
+      {
+        path:'add-blog',
+        element:<AddBlogFrom/>
       }
+
      
     ]
   }
