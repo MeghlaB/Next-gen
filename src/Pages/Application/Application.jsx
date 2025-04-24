@@ -5,7 +5,7 @@ import UseAxiosPublic from '../../Hooks/UseAxiosPublic';
 import Swal from 'sweetalert2';
 
 export default function ApplicationForm() {
-  const axiosPublic = UseAxiosPublic()
+  const axiosPublic = UseAxiosPublic();
   const {
     register,
     handleSubmit,
@@ -15,39 +15,55 @@ export default function ApplicationForm() {
 
   const onSubmit = (data) => {
     console.log(data);
-         const formData ={
-          name: data.name,
-          dob: data.dob,
-          fatherName: data.fatherName,
-          motherName: data.motherName,
-          nationality: data.nationalit,
-          gender: data.gender,
-          idNumber: data.idNumber,
-          maritalStatus: data.maritalStatus,
-          religion: data.religion,
-          profession: data.profession,
-          mobile: data.mobile,
-          email: data.email,
-          mailingAddress: data.mailingAddress,
-          permanentAddress: data.permanentAddress,
-          photo: data.photo[0], 
-          cv: data.cv[0] ,
-         }
+
+    // Create FormData object
+    // const formData = new FormData();
+    
+const formData ={
+  name: data.name,
+    dob: data.dob,
+    fatherName: data.fatherName,
+    motherName: data.motherName,
+    nationality: data.nationality,
+    gender: data.gender,
+    idNumber: data.idNumber,
+    maritalStatus: data.maritalStatus,
+    religion: data.religion,
+    profession: data.profession,
+    mobile: data.mobile,
+    email: data.email,
+    mailingAddress: data.mailingAddress,
+    permanentAddress: data.permanentAddress,
+    photo :data.photo ,
+    cv: data.cv     
+}
   console.log(formData)
-       axiosPublic.post('/application', formData)
-       .then(res=>{
-        console.log(res.data)
-        reset()
-        if(res.data.insertedId){
+   
+
+    // Make API call
+    axiosPublic
+      .post('/application', formData)
+      .then((res) => {
+        console.log(res.data);
+        reset();
+        if (res.data.insertedId) {
           Swal.fire({
-           title: 'Application Submitted!',
-             icon: 'success',
+            title: 'Application Submitted!',
+            icon: 'success',
             confirmButtonText: 'OK',
           });
         }
-       })
-
-    }
+      })
+      .catch((err) => {
+        console.error('Error: ', err);
+        Swal.fire({
+          title: 'Submission Failed!',
+          icon: 'error',
+          text: 'Something went wrong, please try again.',
+          confirmButtonText: 'OK',
+        });
+      });
+  };
 
   return (
     <div className="min-h-screen flex flex-col md:flex-row p-10 gap-10 bg-gray-50">
@@ -163,36 +179,20 @@ export default function ApplicationForm() {
             {errors.permanentAddress && <p className="text-red-600 text-sm">Permanent Address is required</p>}
           </div>
 
-          {/* Row 8 */}
-          <div>
+          {/* File Inputs */}
+          <div className="col-span-2">
             <label className="block mb-1 font-medium">Photo*</label>
-            <input
-              type="file"
-              accept="image/*"
-              {...register('photo', { required: true })}
-              className="w-full p-2 border rounded"
-            />
+            <input type="url" {...register('photo', { required: true })} className="w-full p-2 border rounded" />
             {errors.photo && <p className="text-red-600 text-sm">Photo is required</p>}
           </div>
-          <div>
-            <label className="block mb-1 font-medium">Upload CV*</label>
-            <input
-              type="file"
-              accept=".pdf"
-              {...register('cv', { required: true })}
-              className="w-full p-2 border rounded"
-            />
+          <div className="col-span-2">
+            <label className="block mb-1 font-medium">CV*</label>
+            <input type="url" {...register('cv', { required: true })} className="w-full p-2 border rounded" />
             {errors.cv && <p className="text-red-600 text-sm">CV is required</p>}
           </div>
 
-          {/* Submit Button */}
-          <div className="col-span-1 md:col-span-2 mt-4">
-            <button
-              type="submit"
-              className="w-full bg-blue-500 hover:bg-blue-600 text-white py-2 rounded font-semibold transition duration-300"
-            >
-              Submit
-            </button>
+          <div className="col-span-2 text-center">
+            <button type="submit" className="bg-red-600 text-white py-2 px-4 rounded">Submit</button>
           </div>
         </form>
       </div>
