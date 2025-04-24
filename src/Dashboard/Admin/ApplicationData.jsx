@@ -1,28 +1,29 @@
-import React from 'react';
-import { useQuery } from '@tanstack/react-query';
-import UseAxiosSecuire from '../../Hooks/UseAxiosSecuire';
-import * as XLSX from 'xlsx';
+import React from "react";
+import { useQuery } from "@tanstack/react-query";
+import UseAxiosSecuire from "../../Hooks/UseAxiosSecuire";
+import * as XLSX from "xlsx";
+import { Link } from "react-router-dom"; // Import Link for navigation
 
 function ApplicationData() {
   const axiosSecure = UseAxiosSecuire();
 
   const { data: applications = [] } = useQuery({
-    queryKey: ['applications'],
+    queryKey: ["applications"],
     queryFn: async () => {
-      const res = await axiosSecure.get('/applications');
-      console.log(res?.data)
+      const res = await axiosSecure.get("/applications");
+      console.log(res?.data.cv);
       return res.data;
     },
   });
 
   // Function to export data to Excel
   const exportToExcel = () => {
-    const ws = XLSX.utils.json_to_sheet(applications);  // Convert data to sheet
-    const wb = XLSX.utils.book_new();  // Create a new Excel workbook
-    XLSX.utils.book_append_sheet(wb, ws, 'Applications');  // Append the sheet to workbook
+    const ws = XLSX.utils.json_to_sheet(applications); // Convert data to sheet
+    const wb = XLSX.utils.book_new(); // Create a new Excel workbook
+    XLSX.utils.book_append_sheet(wb, ws, "Applications"); // Append the sheet to workbook
 
     // Write Excel file
-    XLSX.writeFile(wb, 'applications_data.xlsx');
+    XLSX.writeFile(wb, "applications_data.xlsx");
   };
 
   return (
@@ -49,6 +50,7 @@ function ApplicationData() {
             <th className="border p-2">Marital Status</th>
             <th className="border p-2">CV</th> {/* Column for CV */}
             <th className="border p-2">Image</th> {/* Column for Image */}
+            <th className="border p-2">Action</th> {/* Column for View More */}
           </tr>
         </thead>
         <tbody>
@@ -62,20 +64,32 @@ function ApplicationData() {
               <td className="border p-2">{application.motherName}</td>
               <td className="border p-2">{application.gender}</td>
               <td className="border p-2">{application.maritalStatus}</td>
-              {/* Displaying CV Link */}
+            
+
               <td className="border p-2">
-                <a href={application.cvUrl} target="_blank" rel="noopener noreferrer">
-                  View CV
-                </a>
+                {application.cv ? (
+                  <a
+                    className="underline text-blue-600"
+                    href={application.cv}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    View CV
+                  </a>
+                ) : (
+                  <span className="text-gray-400 italic">No CV</span>
+                )}
               </td>
-              {/* Displaying Image */}
+
+            
               <td className="border p-2">
                 <img
-                  src={application.photo} 
+                  src={application.photo}
                   alt="Applicant"
                   className="w-16 h-16 rounded-full"
                 />
               </td>
+              
             </tr>
           ))}
         </tbody>
